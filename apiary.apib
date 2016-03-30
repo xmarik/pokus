@@ -1,0 +1,285 @@
+FORMAT: 1A
+HOST: https://apps.masterappsolutions.com:8443/apps_by_master/api
+
+# Joy
+
+This is api for apps by master
+
+## ShowPromotions [/promotions/{lang}/{appId}/{login}]
+
++ Parameters
+    + lang: cs - code of language represents by two letters
+    + appId: AnnieBabyMonitor - ID of app represented by name
+    + login: Jaja - name of user
+
+### Get all promotions  [GET]
+Retrieves the list of promotions
+
++ Response 200 (application/json;charset=utf-8)
+
++ Attributes (array, optional)
+    + name (string, optional) - id 
+    + promotionUrl (string, optional) - url of promotion
+    + showPromotion (boolean, optional) - name of country
+    + registrationUrls (array[string], optional) - urls of regristrations
+
+
++ Response 500 (application/json;charset=utf-8)
+
+    + Schema
+    
+            {
+                "$schema": "http://json-schema.org/draft-04/schema#",
+                "id": "/",
+                "type": "object",
+                "properties": {
+                    "code": {
+                        "id": "code",
+                        "type": "integer"
+                    },
+                    "message": {
+                        "id": "message",
+                        "type": "string"
+                    }
+                }
+            }
+            
+## Show all apps  [/apps/about/{lang}/{appId}]
+
++ Parameters 
+    + lang: cs - code of language represents by two letters
+    + appId: LteNetwork - ID of app represented by name
+    
+### Show all families [GET]
+
++ Response 200 (application/json;charset=utf-8)
+
+    + Schema
+          
+            {
+                "$schema": "http://json-schema.org/draft-04/schema#",
+                "id": "/",
+                "type": "array",
+                "items": {
+                    "id": "0",
+                    "type": "object",
+                    "properties": {
+                        "name": {
+                            "id": "name",
+                            "type": "string"
+                        },
+                        "description": {
+                            "id": "description",
+                            "type": "string"
+                        },
+                        "apps": {
+                            "id": "apps",
+                            "type": "array",
+                            "items": {
+                                "id": "13",
+                                "type": "object",
+                                "properties": {
+                                    "name": {
+                                        "id": "name",
+                                        "type": "string"
+                                    },
+                                    "storeUrl": {
+                                        "id": "storeUrl",
+                                        "type": "string"
+                                    },
+                                    "iconUrl": {
+                                        "id": "iconUrl",
+                                        "type": "string"
+                                    }
+                                },
+                                "additionalProperties": false
+                            }
+                        }
+                    },
+                    "additionalProperties": false,
+                    "required": [
+                        "name",
+                        "description",
+                        "apps"
+                    ]
+                },
+                "required": [
+                "0"
+                ]
+            }
+
++ Response 500 (application/json;charset=utf-8)
+    
+    + Schema
+    
+            {
+                "$schema": "http://json-schema.org/draft-04/schema#",
+                "id": "/",
+                "type": "object",
+                "properties": {
+                    "code": {
+                        "id": "code",
+                        "type": "integer"
+                    },
+                    "message": {
+                        "id": "message",
+                        "type": "string"
+                    }
+                }
+            }
+
+## Show apps from family [/apps/menu/{lang}/{appId}]
+
++ Parameters 
+    + lang: en - code of language represents by two letters
+    + appId: RemindMe - ID of app
+
+### Show apps [GET]
+
++ Response 200 (application/json;charset=utf-8)
+
+    + Schema
+          
+            {
+                "$schema": "http://json-schema.org/draft-04/schema#",
+                "id": "/",
+                "type": "array",
+                "items": {
+                    "id": "0",
+                    "type": "object",
+                    "properties": {
+                        "name": {
+                            "id": "name",
+                            "type": "string"
+                        },
+                        "description": {
+                            "id": "description",
+                            "type": "string"
+                        },
+                        "apps": {
+                            "id": "apps",
+                            "type": "array",
+                            "items": {
+                                "id": "13",
+                                "type": "object",
+                                "properties": {
+                                    "name": {
+                                        "id": "name",
+                                        "type": "string"
+                                    },
+                                    "storeUrl": {
+                                        "id": "storeUrl",
+                                        "type": "string"
+                                    },
+                                    "iconUrl": {
+                                        "id": "iconUrl",
+                                        "type": "string"
+                                    }
+                                },
+                                "additionalProperties": false
+                            }
+                        }
+                    },
+                    "additionalProperties": false,
+                    "required": [
+                        "name",
+                        "description",
+                        "apps"
+                    ]
+                },
+                "required": [
+                "0"
+                ]
+            }
+        
+
+## Register [/account/register]
+
+### Create a New registration [POST]
+nemelo by se testovat, zapisuje 
++ Request (application/json)
+
+        {
+            "login" : "Elenka",
+            "email" : "email@mail.xx",   
+            "passwordHash" : "asdasdhiauwehiqhwekhasdkh",
+            "language" : "cs",
+            "appName": "AnnieBabyMonitor"
+        }
+
++ Response 200 (application/json;charset=utf-8)
+
+            {
+                "code": 0,
+                "message": "OK"    
+            }
++ Response 500 (application/json;charset=utf-8)
+
+    + Schema
+    
+            {
+                "$schema": "http://json-schema.org/draft-04/schema#",
+                "id": "/",
+                "type": "object",
+                "properties": {
+                    "code": {
+                        "id": "code",
+                        "type": "integer"
+                    },
+                    "message": {
+                        "id": "message",
+                        "type": "string"
+                    }
+                }
+            }
+        
+## Login [/account/login]
+
+### Login correct user [POST]
+
++ Request (application/json)
+
+        {   
+            "login" : "Jaja",   
+            "passwordHash" : "123486184684318478",  
+            "appName": "AnnieBabyMonitor"
+        }
+
++ Response 200 (application/json;charset=utf-8)
+
+            {
+                "id": 2,
+                "login": "Jaja",
+                "email": "muj@email.cz",
+                "language": "cs",
+                "status": "ok",
+                "verified": false
+            }
+
+## Langs [/apps/langs]     
+
+### Get all Language[GET]
+
++ Response 200 (application/json;charset=utf-8)
+    
+    + Schema
+    
+            {
+                "$schema": "http://json-schema.org/draft-04/schema#",
+                "id": "/",
+                "type": "array",
+                "properties": {
+                    "languageId": {
+                        "id": "languageId",
+                        "type": "number"
+                    },
+                    "code": {
+                        "id": "code",
+                        "type": "string"
+                    },
+                    "name": {
+                        "id": "name",
+                        "type": "string"
+                    }
+                }
+            }

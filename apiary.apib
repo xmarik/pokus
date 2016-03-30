@@ -1,7 +1,12 @@
 FORMAT: 1A
-HOST: https://apps.masterappsolutions.com:8443/apps_by_master/api
+HOST: https://apps.masterappsolutions.com:8443/apps_by_master/api/
 
 # Joy
+
+Joy is authentization server for master apps
+
+# Joy API Root [/]
+
 ## ShowPromotions [/promotions/{lang}/{appId}/{login}]
 
 + Parameters
@@ -45,7 +50,7 @@ Retrieves the list of promotions
 + Parameters 
     + lang: cs - code of language represents by two letters
     + appId: LteNetwork - ID of app represented by name
-    
+
 ### Show all families [GET]
 
 + Response 200 (application/json;charset=utf-8)
@@ -105,7 +110,7 @@ Retrieves the list of promotions
             }
 
 + Response 500 (application/json;charset=utf-8)
-    
+
     + Schema
     
             {
@@ -228,7 +233,35 @@ nemelo by se testovat, zapisuje
                     }
                 }
             }
-        
+
+## Langs [/apps/langs]     
+
+### Get all Language[GET]
+
++ Response 200 (application/json;charset=utf-8)
+ 
+    + Schema
+    
+            {
+                "$schema": "http://json-schema.org/draft-04/schema#",
+                "id": "/",
+                "type": "array",
+                "properties": {
+                    "languageId": {
+                        "id": "languageId",
+                        "type": "number"
+                    },
+                    "code": {
+                        "id": "code",
+                        "type": "string"
+                    },
+                    "name": {
+                        "id": "name",
+                        "type": "string"
+                    }
+                }
+            }
+
 ## Login [/account/login]
 
 ### Login correct user [POST]
@@ -250,32 +283,4 @@ nemelo by se testovat, zapisuje
                 "language": "cs",
                 "status": "ok",
                 "verified": false
-            }
-
-## Langs [/apps/langs]     
-
-### Get all Language[GET]
-
-+ Response 200 (application/json;charset=utf-8)
-    
-    + Schema
-    
-            {
-                "$schema": "http://json-schema.org/draft-04/schema#",
-                "id": "/",
-                "type": "array",
-                "properties": {
-                    "languageId": {
-                        "id": "languageId",
-                        "type": "number"
-                    },
-                    "code": {
-                        "id": "code",
-                        "type": "string"
-                    },
-                    "name": {
-                        "id": "name",
-                        "type": "string"
-                    }
-                }
             }

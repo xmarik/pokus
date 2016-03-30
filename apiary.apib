@@ -5,25 +5,54 @@ HOST: https://apps.masterappsolutions.com:8443/apps_by_master/api/
 
 Joy is authentization server for master apps
 
-# Joy API Root [/]
 
 ## ShowPromotions [/promotions/{lang}/{appId}/{login}]
-
-+ Parameters
-    + lang: cs - code of language represents by two letters
-    + appId: AnnieBabyMonitor - ID of app represented by name
-    + login: Jaja - name of user
 
 ### Get all promotions  [GET]
 Retrieves the list of promotions
 
 + Response 200 (application/json;charset=utf-8)
 
-+ Attributes (array, optional)
-    + name (string, optional) - id 
-    + promotionUrl (string, optional) - url of promotion
-    + showPromotion (boolean, optional) - name of country
-    + registrationUrls (array[string], optional) - urls of regristrations
+    + Schema
+    
+            {
+            "$schema": "http://json-schema.org/draft-04/schema#",
+            "id": "/",
+            "type": "array",
+            "items": {
+                "id": "0",
+                "type": "object",
+                "properties": {
+                    "name": {
+                    "id": "name",
+                    "type": "string"
+                    },
+                    "promotionUrl": {
+                        "id": "promotionUrl",
+                        "type": "string"
+                    },
+                    "showPromotion": {
+                        "id": "showPromotion",
+                        "type": "boolean"
+                    },
+                    "registrationUrls": {
+                        "id": "registrationUrls",
+                        "type": "array",
+                        "items": {}
+                    }
+                },
+                "additionalProperties": false,
+                "required": [
+                    "name",
+                    "promotionUrl",
+                    "showPromotion",
+                    "registrationUrls"
+                ]
+            },
+            "required": [
+            "0"
+                ]
+            }
 
 + Response 500 (application/json;charset=utf-8)
 
@@ -283,4 +312,35 @@ nemelo by se testovat, zapisuje
                 "language": "cs",
                 "status": "ok",
                 "verified": false
+            }
+## transaction [/api/inapp/add_transaction]
+
+### Login correct user [POST]
+
++ Request (application/json)
+
+        {
+        "login": "user",
+        "appName": "AnnieBabyMonitor" ,
+        "purchase": "google purchase product or ios receipt" 
+        }
+
++ Response 200 (application/json;charset=utf-8)
+
+    + Schema
+    
+            {
+                "$schema": "http://json-schema.org/draft-04/schema#",
+                "id": "/",
+                "type": "object",
+                "properties": {
+                    "code": {
+                        "id": "code",
+                        "type": "integer"
+                    },
+                    "message": {
+                        "id": "message",
+                        "type": "string"
+                    }
+                }
             }
